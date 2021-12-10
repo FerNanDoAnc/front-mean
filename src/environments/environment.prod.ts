@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
 
-  baseUrl: 'http://localhost:4000/music'
+  baseUrl: 'https://template-angular-mean.herokuapp.com/music'
 };
