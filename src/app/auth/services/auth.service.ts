@@ -36,15 +36,15 @@ export class AuthService {
     
     return this.http.post<AuthResponse>(url,body)
       .pipe(
-        tap(resp=>{
-          if(resp.ok){
+        tap(({ok,token})=>{
+          if(ok){
             // para guardar info e el localstorage
-            localStorage.setItem('token',resp.token!);
-            this._usuario = {
-              name: resp.name!,
-              uid: resp.uid!,
-              email: resp.email!
-            }
+            localStorage.setItem('token',token!);
+            // this._usuario = {
+            //   name: resp.name!,
+            //   uid: resp.uid!,
+            //   email: resp.email!
+            // }
           }
         }),
         map( valid=> valid.ok),
@@ -65,11 +65,7 @@ export class AuthService {
         tap(resp=>{
           if(resp.ok){
             localStorage.setItem('token',resp.token!);
-            this._usuario = {
-              name: resp.name!,
-              uid: resp.uid!,
-              email: resp.email!
-            }
+           
           }
         }),
         map( valid=> valid.ok),
