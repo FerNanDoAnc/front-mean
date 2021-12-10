@@ -26,6 +26,34 @@ export class AuthService {
 
   ) { }
 
+  // -------------------------------------------------
+  // Registro de usuarios
+  registro(name:string, email:string, password:string){
+    
+    const url = `${this.baseUrl}/auth/new`;
+    // const url = this.baseUrl + '/auth';
+    const body = {name,email,password};
+    
+    return this.http.post<AuthResponse>(url,body)
+      .pipe(
+        tap(resp=>{
+          if(resp.ok){
+            // para guardar info e el localstorage
+            localStorage.setItem('token',resp.token!);
+            this._usuario = {
+              name: resp.name!,
+              uid: resp.uid!,
+              email: resp.email!
+            }
+          }
+        }),
+        map( valid=> valid.ok),
+        catchError( err=>of(err.error.message))
+      )
+  }
+
+  // -------------------------------------------------
+  // Login de usuarios
   login(email:string,password:string){
     
     const url = `${this.baseUrl}/auth`;
@@ -50,7 +78,8 @@ export class AuthService {
     
   }
 
-
+  // -------------------------------------------------
+  // Validar token
   validarToken():Observable<boolean>{
     const url = `${this.baseUrl}/auth/renew`;
     const headers = new HttpHeaders()
@@ -74,6 +103,8 @@ export class AuthService {
       );
   }
 
+  // -------------------------------------------------
+  // Cerrar sesion
   logout(){
     localStorage.clear();
   }

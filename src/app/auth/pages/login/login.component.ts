@@ -12,6 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent  {
 
+  get usuario(){
+    return this.authService.usuario;
+  }
+
   miFormulario: FormGroup=this.fb.group({
     email: ['test1@gmail.com',[Validators.required,Validators.email]],
     password: ['123456',[Validators.required,Validators.minLength(6)]]
@@ -27,25 +31,32 @@ export class LoginComponent  {
 
 
   login(){
-
-    console.log("mi formulario",this.miFormulario.value);
     
     const {email,password}=this.miFormulario.value;
 
     this.authService.login(email,password)
       .subscribe( ok=>{
-        console.log("ok",ok);
 
         if(ok===true){
-          
           this.router.navigateByUrl('/dashboard');
+          
+          Swal.fire({
+            title: 'Sesion Iniciada',
+            html: 'Bienvenido :'+this.usuario.name,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
+            width: 350
+          });
 
         }else{
             Swal.fire({
-              title: 'Error',
-              text: 'Usuario o contraseña incorrectos',
+              title: '!Error!',
+              text: ''+ok+'!',
               icon: 'error',
-              confirmButtonText: 'Ok'
+              timer: 2500,
+              confirmButtonText: 'Ok',
+              width: 350
             });
         }
 
