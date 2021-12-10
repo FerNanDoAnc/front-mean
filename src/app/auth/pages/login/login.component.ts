@@ -27,6 +27,7 @@ export class LoginComponent  {
 
 
   login(){
+
     console.log("mi formulario",this.miFormulario.value);
     
     const {email,password}=this.miFormulario.value;
@@ -50,5 +51,5 @@ export class LoginComponent  {
 
       });
 
-    }
+  }
 }
