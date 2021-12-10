@@ -36,6 +36,7 @@ export class AuthService {
       .pipe(
         tap(resp=>{
           if(resp.ok){
+            // localStorage.setItem('token',resp.token!);
             this._usuario = {
               name: resp.name!,
               uid: resp.uid!,
@@ -44,7 +45,7 @@ export class AuthService {
           }
         }),
         map( valid=> valid.ok),
-        catchError( err=>of(false))
+        catchError( err=>of(err.error.message))
       )
     
   }

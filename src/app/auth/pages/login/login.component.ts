@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -31,13 +33,19 @@ export class LoginComponent  {
 
     this.authService.login(email,password)
       .subscribe( ok=>{
+        console.log("ok",ok);
 
-        if(ok){
+        if(ok===true){
           
           this.router.navigateByUrl('/dashboard');
 
         }else{
-          alert("Usuario o contraseña incorrectos");
+            Swal.fire({
+              title: 'Error',
+              text: 'Usuario o contraseña incorrectos',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            });
         }
 
       });
