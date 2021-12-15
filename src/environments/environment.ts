@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  baseUrl: 'http://localhost:4000/music',
-  // baseUrl: 'https://template-angular-mean.herokuapp.com/music',
+  // baseUrl: 'http://localhost:4000/music',
+  baseUrl: 'https://template-angular-mean.herokuapp.com/music',
 };
 
 /*

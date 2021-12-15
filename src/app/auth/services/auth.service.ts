@@ -36,17 +36,24 @@ export class AuthService {
     
     return this.http.post<AuthResponse>(url,body)
       .pipe(
-        tap(({ok,token})=>{
-          if(ok){
+        tap(resp=>{
+          if(resp.ok){
             // para guardar info e el localstorage
-            localStorage.setItem('token',token!);
-            // this._usuario = {
-            //   name: resp.name!,
-            //   uid: resp.uid!,
-            //   email: resp.email!
-            // }
+            localStorage.setItem('token',resp.token!);
+            // para poder llamar el swat alert 
+            this._usuario = {
+              name: resp.name!,
+              uid: resp.uid!,
+              email: resp.email!
+            }
           }
         }),
+        // tap(({ok,token})=>{
+        //   if(ok){
+        //     // para guardar info e el localstorage
+        //     localStorage.setItem('token',token!);
+        //   }
+        // }),
         map( valid=> valid.ok),
         catchError( err=>of(err.error.message))
       )
@@ -64,8 +71,14 @@ export class AuthService {
       .pipe(
         tap(resp=>{
           if(resp.ok){
+            // para guardar info e el localstorage
             localStorage.setItem('token',resp.token!);
-           
+            // para poder llamar el swat alert 
+            this._usuario = {
+              name: resp.name!,
+              uid: resp.uid!,
+              email: resp.email!
+            }
           }
         }),
         map( valid=> valid.ok),
