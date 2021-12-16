@@ -1,21 +1,53 @@
 
 
-<h1>Dashboard</h1>
-<hr>
+<div class="home">
+    
+    <h1>Dashboard</h1>
+    <hr>
 
-<p>
-    Estás autenticado
-</p>
+    <p>
+        Estás autenticado
+    </p>
 
-<h3>
-    Bienvenido!!
-</h3>
+    <div class="portada">foto-portada
+    </div>
+    <!-- PERFIL-FOTO -->
+    <div class="perfil">
+        <div  class="perfil-user">
+            <img src="favicon.ico" >
+        </div>
+    </div>
+    <!-- NOMBRE -->
+    <div class="nombre">
+        <div class="" >
+            <div class="noto">
+                <h4 style="font-weight: bold;margin-bottom: 0;">Informacion de Usuario
+                </h4>
+            </div>
+        </div>
+    </div>
+    <!-- INFO -->
+    <div class="info">
+        <div class="info-full" >
+            <div class="info-role noto">
+                <h5 style="font-weight: bold;margin-bottom: 0;">
+                     <pre>Nombre: {{usuario.name}}</pre>
+                </h5>
+            </div>
+            <div class="info-number noto">
+                <h5 style="font-weight: bold;margin-bottom: 0;">
+                    <pre>Correo: {{usuario.email}}</pre>
+                </h5>
+            </div>
+        </div>
+    </div>
 
-<h4>Informacion de Usuario</h4>
-
-<pre>{{usuario | json}}</pre>
-
-<button (click)="logout()"
-        class="btn btn-danger">
+    
+    <button (click)="logout()"
+    class="btn btn-danger">
     Cerrar Sesion
-</button>
+    </button>
+
+  </div>
+  
+
